@@ -13,4 +13,5 @@ const flipPairs = str => {
 
 var input = 'check out how interesting this problem is, it\'s insanely interesting!';
 var output = flipPairs(input);
+
 console.log(output);
