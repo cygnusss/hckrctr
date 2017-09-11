@@ -1,4 +1,4 @@
-const flipPairs = (str) => {
+const flipPairs = str => {
   let strArr = str.split('');
   
 
