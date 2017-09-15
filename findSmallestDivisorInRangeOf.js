@@ -1,19 +1,31 @@
-function isPrime (num) {
-  if (num === 1 || num === 0) {
+// A helper function to find primes
+// check if num is 0 || 1 and return false if so
+// iterate until the sqrt of the num
+// if num is divisible by i return false
+// return true else
+
+const isPrime = num => {
+  if (num === 0 || num === 1) {
     return false;
   }
-  for (var i = 2; i <= Math.floor(Math.sqrt(num)); i++) {
+  
+  for (let i = 2; i <= Math.sqrt(num); i++) {
     if (num % i === 0) {
       return false;
     }
   }
+  
   return true;
 }
 
-function generatePrimesUpTo(end) {
-  var primes = [];
+// Any positive number can be a product of primes
+// thus create a generatePrimesUpTo function to find primes in range
+// use isPrime to find primes and collect them in an array
+
+const generatePrimesUpTo = num => {
+  let primes = [];
   
-  for (var i = 2; i <= end; i++) {
+  for (let i = 2; i <= num; i++) {
     if (isPrime(i)) {
       primes.push(i);
     }
@@ -22,101 +34,27 @@ function generatePrimesUpTo(end) {
   return primes;
 }
 
-// find primes up to num's sqrt
-// while num != 1
-// if num is divisble by prime push prime in primeFactors
-// update num to the value of remainder
+// find the largest powers of prime bases that don't exceed a given range
+// highest base for 5 is 1 since 5^2 = 25 --> 25 > 20
+// add products in a Set to get rid of repetitions
+// sum up all nums in the set and return the product
 
-function findPrimeFactorsOf(num) {
-  var possiblePrimes = generatePrimesUpTo(Math.ceil(Math.sqrt(num)));
-  var primeFactors = [];
-  var i = 0;
+const findSmallestNumDivisbleInRange = num => {
+  const bases = generatePrimesUpTo(num);
+  let products = new Set();
   
-  while (num !== 1) {
-    if (num % possiblePrimes[i] === 0) {
-      primeFactors.push(possiblePrimes[i]);
-      num = num / possiblePrimes[i];
-      i = 0;
-    } else {
-      i++;
+  for (let j = 0; j < bases.length; j++) {
+    let largestProduct = 0; 
+    for (let i = 1; i <= 1e2; i++) {
+      if (Math.pow(bases[j], i) < 20) {
+        if (Math.pow(bases[j], i) > largestProduct) {
+          largestProduct = Math.pow(bases[j], i);
+        }
+      }
     }
+    products.add(largestProduct);
   }
   
-  return primeFactors;
+  return [...products].reduce((a, b) => a *= b);
 }
-
-
-function getNumbersUpTo(limit) {
-  var nums = [];
-  
-  for (var i = 1; i <= limit; i++) {
-    nums.push(i);
-  }
-  
-  return nums;
-}
-
-
-// input: number
-// output array containing unique primes, for the number, raised to their exponents
-
-// find numbers exponents
-// create a set to get unique primeFactors
-// create an array baseExpData to store base-exponent pairs
-
-// var uniquePrimes = new Set(findPrimeFactorsOf(num));
-// var nonUniquePrimes = findPrimeFactorsOf(num);
-// uniquePrimes = [...uniquePrimes];
-
-// iterate each item of the uniquePrimes, comparing it to each number of nonUniquePrimes
-// create var exponent = 0
-// if the numbers match exponent++
-// after iterating nonUniquePrimes push the current num of the set and exponent into baseExpData
-// set exponent to 0
-
-// return baseExpData
-
-// FINDING PRIME FACTORS - USEFUL FUNCTION BUT NOT THIS TIME :(
-// function findBaseAndExponentsOfPrimes(num) {
-//   var uniquePrimes = new Set(findPrimeFactorsOf(num));
-//   var nonUniquePrimes = findPrimeFactorsOf(num);
-//   return [...uniquePrimes]
-//                           .map(function(currUniquePrime) {
-//                             var exponent = 0;
-//                             nonUniquePrimes.forEach(function(currNonUniquePrime){
-//                               if (currUniquePrime === currNonUniquePrime) {
-//                                 exponent++;
-//                               }
-//                             });
-//                             return Math.pow(currUniquePrime, exponent);
-//                           });
-// }
-
-// DON'T THINK THIS IS USEFUL THOUGH
-// function findBiggestPrimeSquaresOf(num) {
-//   var baseExpData = findBaseAndExponentsOfPrimes(num);
-//   var numbers = getNumbersUpTo(num);
-//   return baseExpData
-//                     .map(function(currUniquePrime) {
-//                       var biggestSquare = 0;
-//                       numbers.forEach(function(currNum){
-//                         if (Math.sqrt(currNum) === currUniquePrime) {
-//                           if (currNum > biggestSquare) {
-//                             biggestSquare = currNum;
-//                           }
-//                         } else if (currNum === currUniquePrime) {
-//                           biggestSquare = currUniquePrime;
-//                         }
-//                       });
-//                       return biggestSquare;
-//                     });
-// }
-
-// find unique primes of num
-// erase them from non unique primes up to num 
-// check if nonUniquePrimes include any of biggest squares of its primes
-// if not push the squares into nonUniquePrimes
-// multiply nonUniquePrimes
-
-
-// iterate in the primesUpTo array
+findSmallestNumDivisbleInRange(20)
