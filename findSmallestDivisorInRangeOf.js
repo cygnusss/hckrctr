@@ -1,3 +1,11 @@
+/*
+  Any positive non-prime number can be expressed as a product of two prime numbers. Thus, if you want to find a number 
+  divisible by each number within a given range, you only need to find out if the number is divisible by each prime number
+  of the range. Furthermore, if you know that the number is divisible by a prime number raised to a certain power you 
+  don't need to check if the number is divisible by the prime base.
+  This is how I implemented the function using the above information. 
+*/
+
 // A helper function to find primes
 // check if num is 0 || 1 and return false if so
 // iterate until the sqrt of the num
