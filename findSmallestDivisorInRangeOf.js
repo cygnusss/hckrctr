@@ -16,7 +16,7 @@ const isPrime = num => {
   }
   
   return true;
-}
+};
 
 // Any positive number can be a product of primes
 // thus create a generatePrimesUpTo function to find primes in range
@@ -32,7 +32,7 @@ const generatePrimesUpTo = num => {
   }
   
   return primes;
-}
+};
 
 // find the largest powers of prime bases that don't exceed a given range
 // highest base for 5 is 1 since 5^2 = 25 --> 25 > 20
@@ -42,11 +42,10 @@ const generatePrimesUpTo = num => {
 const findSmallestNumDivisbleInRange = num => {
   const bases = generatePrimesUpTo(num);
   let products = new Set();
-  
   for (let j = 0; j < bases.length; j++) {
     let largestProduct = 0; 
     for (let i = 1; i <= 1e2; i++) {
-      if (Math.pow(bases[j], i) < 20) {
+      if (Math.pow(bases[j], i) <= num) {
         if (Math.pow(bases[j], i) > largestProduct) {
           largestProduct = Math.pow(bases[j], i);
         }
@@ -56,5 +55,22 @@ const findSmallestNumDivisbleInRange = num => {
   }
   
   return [...products].reduce((a, b) => a *= b);
-}
-findSmallestNumDivisbleInRange(20)
+};
+
+const assertEqual = (expected, actual, testName) => {
+  if (expected === actual) {
+    console.log(testName + ' passed');
+  } else {
+    console.log('FAILED [' + testName + '] Expected [' + expected + '], but got [' + actual + '].');
+  }
+};
+
+
+assertEqual(232792560, findSmallestNumDivisbleInRange(20), 'Should find the smallest number divisible by each number within a range of 2 to 20');
+assertEqual(2520, findSmallestNumDivisbleInRange(10), 'Should find the smallest number divisible by each number within a range of 2 to 10');
+assertEqual(10, findSmallestNumDivisbleInRange(10), 'Should throw an error, since given a wrong expected value');
+
+
+
+
+
