@@ -49,7 +49,7 @@ const generatePrimesUpTo = num => {
 // input: a number
 // output: the product of unique prime numbers or prime squares within a given range
 // find the largest powers of prime bases that don't exceed a given range
-// highest base for 5 is 1 since 5^2 = 25 --> 25 > 20
+// highest power for 5 is 1 since 5^2 = 25 --> 25 > 20
 // add products in a Set to get rid of repetitions
 // sum up all nums in the set and return the product
 
