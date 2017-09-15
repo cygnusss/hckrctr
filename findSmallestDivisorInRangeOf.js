@@ -6,6 +6,8 @@
   This is how I implemented the function using the above information. 
 */
 
+// Input: any number
+// Output: number is prime => true || false
 // A helper function to find primes
 // check if num is 0 || 1 and return false if so
 // iterate until the sqrt of the num
@@ -26,8 +28,9 @@ const isPrime = num => {
   return true;
 };
 
-// Any positive number can be a product of primes
-// thus create a generatePrimesUpTo function to find primes in range
+// Input: a number
+// Output: an array containing all primes within a given range
+// create a generatePrimesUpTo function to find primes within a given range
 // use isPrime to find primes and collect them in an array
 
 const generatePrimesUpTo = num => {
@@ -42,6 +45,9 @@ const generatePrimesUpTo = num => {
   return primes;
 };
 
+
+// input: a number
+// output: a product of unique prime numbers || prime squares within a range
 // find the largest powers of prime bases that don't exceed a given range
 // highest base for 5 is 1 since 5^2 = 25 --> 25 > 20
 // add products in a Set to get rid of repetitions
